@@ -1,65 +1,138 @@
 # reconY
 
-ReconY is an automated reconnaissance script written in Bash designed to streamline the initial phase of security assessments. It integrates various tools and techniques to discover subdomains, find open ports, capture screenshots, and perform content discovery on target domains. The script is highly customizable, allowing users to configure parameters based on their preferences.
+## ****
 
-## **Features**
+**Overview:**
 
-- **Subdomain Enumeration:** Uses tools like Subfinder, Assetfinder, and others to discover subdomains associated with the target domain.
-- **Wayback Machine Analysis:** Scrapes the Wayback Machine for historical URLs and extracts potential vulnerabilities using GF (Grep Find).
-- **Host Alive Detection:** Probes for live hosts using httprobe and httpx, removing non-responsive hosts.
-- **Directory and File Discovery:** Utilizes Dirsearch to discover common directories and files on live subdomains.
-- **Screenshots:** Captures screenshots of the target's HTTP and HTTPS ports using Aquatone.
-- **Content Discovery:** Identifies potential vulnerabilities by analyzing Wayback Machine data and looking for specific patterns like SSRF, IDOR, LFI, etc.
-- **WAF Detection:** Identifies potential Web Application Firewalls (WAFs) in use.
-- **CNAME Analysis:** Identifies CNAME records and checks for potential NS takeover vulnerabilities.
-- **Reports Generation:** Generates detailed HTML reports for each subdomain, providing an overview of the reconnaissance findings.
+This script automates a comprehensive recon framework for gathering information about a target domain. It combines tools like Subfinder, Aquatone, Dirsearch, and more to discover subdomains, enumerate live hosts, identify potential vulnerabilities, and gather additional intelligence.
 
-## **Prerequisites**
+**Disclaimer:**
 
-- Bash shell
-- Various reconnaissance tools such as Subfinder, Assetfinder, httprobe, httpx, Dirsearch, Aquatone, GF, and others (Make sure they are installed and available in your PATH).
+This script is provided for educational purposes only and should not be used without permission on domains you do not own. Misusing this script for malicious purposes is illegal and unethical.
 
-## **Installation**
+**Requirements:**
 
-1. Clone the repository:
-    
-    ```bash
-    bashCopy code
-    git clone https://github.com/yourusername/ReconY.git
-    cd ReconY
-    
-    ```
-    
-2. Edit the configuration section in the script (**`recony.sh`**) to set the desired parameters.
+**Operating System:**
 
-## **Usage**
+- Linux-based operating system
 
-Run the script with the target domain as an argument:
+**Tools:**
 
-```bash
-bashCopy code
-./recony.sh -d target.com
+**Essential:**
 
+- **Subfinder:** [https://github.com/projectdiscovery/subfinder](https://github.com/projectdiscovery/subfinder)
+- **Assetfinder:** [https://github.com/tomnomnom/assetfinder](https://github.com/tomnomnom/assetfinder)
+- **HTTPX:** [https://github.com/projectdiscovery/httpx](https://github.com/projectdiscovery/httpx)
+- **Waybackurls:** [https://github.com/tomnomnom/waybackurls](https://github.com/tomnomnom/waybackurls)
+- **Gau:** [https://github.com/lc/gau](https://github.com/lc/gau)
+- **GF (GrepFuzz):** [https://github.com/tomnomnom/gf](https://github.com/tomnomnom/gf)
+- **Dirsearch:** [https://github.com/maurosoria/dirsearch](https://github.com/maurosoria/dirsearch)
+- **Unfurl:** [https://github.com/tomnomnom/unfurl](https://github.com/tomnomnom/unfurl)
+
+**Optional:**
+
+- **Aquatone:** [https://github.com/michenriksen/aquatone](https://github.com/michenriksen/aquatone) (Requires Chromium: [https://chromium.org/](https://chromium.org/))
+- **Massdns:** [https://github.com/blechschmidt/massdns](https://github.com/blechschmidt/massdns) (For advanced subdomain discovery)
+
+**Installation:**
+
+Follow the installation instructions for each tool on their respective websites or repositories. Some tools may require additional dependencies, like Python and Go.
+
+**Usage:**
+
+```jsx
+./recony.sh -d <target_domain> [options]
+
+Options:
+  -d <target_domain>     Required - Target domain to scan.
+  -e <excluded_domain>   Optional - Domain to exclude from subdomain discovery.
+  -r <subdomain>         Optional - Specific subdomain to recon (for recursive checks).
+  -s <foldername>        Optional - Specify a custom folder name for storing results.
 ```
 
-Additional options include specifying excluded subdomains (**`-e`**) and providing custom subdomain reports (**`-r`**).
+**Features:**
 
-```bash
-bashCopy code
-./recony.sh -d target.com -e excluded.domain.com,other.domain.com -r subdomain1.domain.com -r subdomain2.domain.com
+- Subdomain discovery with Subfinder and Assetfinder
+- Live host enumeration with HTTPX and Massdns (optional)
+- Wayback URL discovery with Waybackurls and Gau
+- Potential vulnerability identification with GF
+- Web technology discovery with Dirsearch
+- Screenshot capture with Aquatone (Chromium required)
+- Recursive subdomain checks on discovered subdomains
+- DNS record checks with CNAME analysis for potential takeover vulnerabilities
+- Extracting parameters and URLs from Wayback data for further analysis
+- Wordlist-based directory bruteforcing with Dirsearch
+- Parameter extraction from discovered URLs with Unfurl
 
+**Inspiration and Credits:**
+
+This script is heavily inspired by the lazyrecon script by nahamsec: [https://github.com/nahamsec/lazyrecon](https://github.com/nahamsec/lazyrecon). We thank nahamsec for their contribution and valuable resource.
+
+**Additional Notes:**
+
+- Review the script configuration options to customize your scan.
+- The script will create a directory named `<target_domain>_<date>` within the current directory to store results.
+- Consider the limitations of each tool and use additional techniques for a comprehensive assessment.
+- Remember to use this script responsibly and ethically, respecting legal and privacy obligations.
+
+**Further Customization:**
+
+You can modify the script to include additional tools, adjust wordlists, and adapt it to your specific needs. Please use this tool responsibly and ethically.
+
+**Overview:**
+
+This script automates a fast recon framework for gathering information about a target domain. It utilizes various tools for subdomain discovery, live host enumeration, potential vulnerability identification, and additional intelligence gathering.
+
+**Note:** This script is for educational purposes only and should not be used without permission on domains you don't own. Misusing this script for malicious purposes is illegal and unethical.
+
+**Requirements:**
+
+**Operating System:** Linux-based systems (e.g., Ubuntu, Debian, Kali)
+
+**Tools:**
+
+- **Subfinder:** [https://github.com/projectdiscovery/subfinder](https://github.com/projectdiscovery/subfinder)
+- **Assetfinder:** [https://github.com/tomnomnom/assetfinder](https://github.com/tomnomnom/assetfinder)
+- **HTTPX:** [https://github.com/projectdiscovery/httpx](https://github.com/projectdiscovery/httpx)
+- **Waybackurls:** [https://github.com/tomnomnom/waybackurls](https://github.com/tomnomnom/waybackurls)
+- **Gau:** [https://github.com/lc/gau](https://github.com/lc/gau)
+- **GF (GrepFuzz):** [https://github.com/tomnomnom/gf](https://github.com/tomnomnom/gf)
+- **Aquatone:** [https://github.com/michenriksen/aquatone](https://github.com/michenriksen/aquatone)
+- **Wafw00f:** [https://github.com/EnableSecurity/wafw00f](https://github.com/EnableSecurity/wafw00f)
+- **Dirsearch:** [https://github.com/maurosoria/dirsearch](https://github.com/maurosoria/dirsearch)
+- **Nuclei:** [https://github.com/projectdiscovery/nuclei-templates](https://github.com/projectdiscovery/nuclei-templates)
+- **Afrog:** [https://github.com/zan8in/afrog](https://github.com/zan8in/afrog)
+
+**Installation:**
+
+Follow the installation instructions for each tool on their respective websites or repositories. Some tools may require additional dependencies, like Python and Go.
+
+**Usage:**
+
+```jsx
+./fast_recon.sh -d <target_domain> [options]
+
+Options:
+  -d <target_domain>     Required - Target domain to scan.
+  -e <exclude_domain>   Optional - Domain to exclude from subdomain discovery.
+  -a                    Optional - Run Aquatone for DNS profiling.
+  -w                    Optional - Run Wafw00f for WAF detection.
+  -s <wordlist>         Optional - Path to wordlist for Dirsearch.
+  -n                    Optional - Run Nuclei for vulnerability scanning.
 ```
 
-## **Customization**
+**Additional Notes:**
 
-- Configure the script parameters in the configuration section of **`recony.sh`** based on your preferences.
-- Customize the tools and their options as needed.
+- Replace `<target_domain>` with the actual domain you want to scan.
+- Be aware of the legal and ethical implications of using this script.
+- Review the configuration options in the script to customize your scan.
+- The script will create a directory named `fastRecon_<date>` within the current directory to store results.
+- Consider the limitations of each tool and use additional techniques for a comprehensive assessment.
 
-## **Disclaimer**
+**Disclaimer:**
 
-This script is provided for educational and ethical testing purposes only. The author is not responsible for any misuse or damage caused by this script.
+The author is not responsible for any misuse of this script. By using this script, you acknowledge that you understand and agree to these terms.
 
-## **Acknowledgments**
+**Security Note:**
 
-- Special thanks to the developers of the tools integrated into this script.
-- Inspired by various reconnaissance methodologies and community contributions
+This script provides powerful tools for automated recon. Remember to use it responsibly and ethically, respecting legal and privacy obligations. Always obtain proper authorization before scanning any domain that you do not own or manage.
